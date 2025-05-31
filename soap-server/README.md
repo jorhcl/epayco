@@ -1,13 +1,6 @@
 # EpayCo Prueba tecnica fullstack PHP React
 
 
-
-Archivo compuesto por 3 carpetas
-
- - Soap-server
- - Rest
- - Frontend
-
  # Soap server
 
 -   Laravel 12
@@ -19,10 +12,6 @@ Intalacion
 - Correr composer install
 - Correr php artisan migrate
 - Correr php artisan serve para levantar servidor
-
-# Rest
-
-
 
 
 ## Authors
