@@ -29,15 +29,7 @@ const api = axios.create({
 	},
 });
 
-api.interceptors.response.use(
-	response=>response,
-	error=>{
-		if(error.response) {
-			throw error.response.data;
-		}
-		throw error
-	}
-);
+
 
 /// creo funcion generica de post para la llamade de api para retornar la promesa
 async function apiCall<T, R= ApiResponse>(url: string, data: T): Promise<R> {
