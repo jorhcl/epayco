@@ -1,0 +1,371 @@
+{
+	"info": {
+		"_postman_id": "675d1d7a-a383-4e91-ac41-2e8bcaea0114",
+		"name": "epayco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2994926"
+	},
+	"item": [
+		{
+			"name": "Soap",
+			"item": [
+				{
+					"name": "Registrar cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://127.0.0.1:8000/soap/server\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <ws:registerClient>\n         <document>123456789</document>\n         <firstName>Jorge D</firstName>\n         <lastName>Cortes</lastName>\n         <email>jorhcl@hotmail.com</email>\n         <celPhone>+529981447710</celPhone>\n      </ws:registerClient>\n   </soapenv:Body>\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/soap/server",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"soap",
+								"server"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cargar Saldo a la billtera",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://127.0.0.1:8000/soap/server\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <ws:loadWallet>\n         <document>123456789</document>\n         <celPhone>+529981447710</celPhone>\n         <amount>150.30</amount>\n      </ws:loadWallet>\n   </soapenv:Body>\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/soap/server",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"soap",
+								"server"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Iniciar Pago",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://127.0.0.1:8000/soap/server\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <ws:payWithWallet>\n         <document>123456789</document>\n         <celPhone>+529981447710</celPhone>\n         <amount>10</amount>\n         <description>Compra</description>\n      </ws:payWithWallet>\n   </soapenv:Body>\n</soapenv:Envelope>"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/soap/server",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"soap",
+								"server"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirmar compra",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://127.0.0.1:8000/soap/server\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <ws:confirmPayment>\n         <token>439167</token>\n         <sessionId>3aa05e30b5f0f02e4066afab11cbc812</sessionId>\n      </ws:confirmPayment>\n   </soapenv:Body>\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/soap/server",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"soap",
+								"server"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener saldo Wallet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://127.0.0.1:8000/soap/server\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <ws:getWalletBalance>\n            <document>123456789</document>\n         <celPhone>+529981447710</celPhone>\n      </ws:getWalletBalance>\n   </soapenv:Body>\n</soapenv:Envelope>"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/soap/server",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"soap",
+								"server"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener transacciones de la wallet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://127.0.0.1:8000/soap/server\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <ws:getWalletTransactions>\n         <document>123456789</document>\n         <celPhone>+529981447710</celPhone>\n      </ws:getWalletTransactions>\n   </soapenv:Body>\n</soapenv:Envelope>"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/soap/server",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"soap",
+								"server"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Servicio Rest",
+			"item": [
+				{
+					"name": "Registro de cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"document\": \"3234234\",\n  \"firstName\": \"Jorge\",\n  \"lastName\": \"Cortes\",\n  \"email\": \"jorhcl22@hotmail.com\",\n  \"celPhone\": \"+52998143333\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8010/register-client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8010",
+							"path": [
+								"register-client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cargar Saldo a la billetera",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"document\": \"3234234\",\n  \"celPhone\": \"+52998143333\",\n  \"amount\": 300\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8010/load-wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8010",
+							"path": [
+								"load-wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Iniciar pago",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"document\": \"3234234\",\n  \"celPhone\": \"+52998143333\",\n  \"amount\": 2,\n  \"description\": \"Nueva compra2\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8010/pay-with-wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8010",
+							"path": [
+								"pay-with-wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirmar pago",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\":\"497039\",\n    \"sessionId\":\"f2be4f31b7e0f17dfd738cc0a4cfdb7f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8010/confirm-payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8010",
+							"path": [
+								"confirm-payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Saldo Wallet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"document\": \"33333333\",\n    \"celPhone\": \"+529981447711\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8010/wallet-balance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8010",
+							"path": [
+								"wallet-balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Transacciones",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"document\": \"3234234\",\n    \"celPhone\": \"+52998143333\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8010/get-history",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8010",
+							"path": [
+								"get-history"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

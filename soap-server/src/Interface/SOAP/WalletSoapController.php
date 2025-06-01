@@ -5,7 +5,7 @@ namespace Src\Interface\SOAP;
 use Src\Shared\Response\StandardResponse;
 use Src\Application\UseCases\LoadWalletUseCase;
 use Exception;
-use Illuminate\Console\View\Components\Confirm;
+use Illuminate\Support\Facades\Log as FacadesLog;
 use Src\Application\UseCases\ConfirmPaymentUseCase;
 use Src\Application\UseCases\GetWalletBalanceUseCase;
 use Src\Application\UseCases\GetWalletTransactionsUseCase;
@@ -39,6 +39,9 @@ class WalletSoapController
         try {
             $wallet = $this->loadWalletUseCase->handle($document, $celPhone, $amount);
 
+            FacadesLog::info('Wallet loaded successfully', [
+                $wallet
+            ]);
 
             if (!$wallet) {
                 return StandardResponse::error(

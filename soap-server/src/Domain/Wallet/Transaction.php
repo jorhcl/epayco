@@ -105,7 +105,7 @@ class Transaction
         $this->updatedAt = new \DateTime();
     }
 
-    public function getToken(): string
+    public function getToken(): ?string
     {
         return $this->token;
     }

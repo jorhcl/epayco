@@ -66,19 +66,42 @@ class WalletService
     public function sendTokenByEmail(string $email, string $token, string $sessionId): void
     {
 
-        $url = env('FRONTEND_URL');
-        $subject = 'Token de transacción';
+        $url = env('FRONTEND_URL') . "/confirm/{$sessionId}";
+        $subject = 'Informacion de Compra - Epayco Wallet';
         $message = <<<EOT
-            Gracias por iniciar una compra.
+             <html>
+        <body style="font-family: Arial, sans-serif; padding: 20px;">
+            <h2>Confirmación de Compra</h2>
+            <p>Gracias por iniciar una compra.</p>
 
-            Por favor, confirme su transacción usando el siguiente enlace:
-            {$url}/confirmar?token={$token}&session_id={$sessionId}
+            <p style="margin-top: 20px;">Tu token de confirmación es:</p>
+            <p style="font-size: 32px; font-weight: bold; color: #2c3e50; margin: 10px 0;">{$token}</p>
 
+            <p>También puedes confirmar directamente usando el siguiente botón:</p>
 
+            <a href="{$url}"
+                style="
+                    display: inline-block;
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 12px 24px;
+                    text-align: center;
+                    text-decoration: none;
+                    font-size: 16px;
+                    border-radius: 6px;
+                    margin-top: 20px;
+                ">
+                Confirmar Pago
+            </a>
+
+            <p style="margin-top: 40px; font-size: 14px; color: #777;">
                 Este enlace es válido solo para esta sesión.
+            </p>
+        </body>
+        </html>
         EOT;
 
-        Mail::raw($message, function ($message) use ($email, $subject) {
+        Mail::html($message, function ($message) use ($email, $subject) {
             $message->to($email)->subject($subject);
         });
     }

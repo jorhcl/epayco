@@ -24,6 +24,9 @@ Intalacion
 - Correr composer install
 - Correr php artisan migrate
 - Correr php artisan serve para levantar servidor
+- Configurar env con credenciales de correo para envios de token y confonfirmacion de compra 
+- agregar varaiable FRONTEND_URL en env FRONTEND_URL = http://localhost:5175
+- Se puede verificar los test con el comando php artisan test
 
 
 ## Authors

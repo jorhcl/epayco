@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 
@@ -31,20 +31,24 @@ class ClientController extends Controller
 
     public function registerClient(Request $request)
     {
-        $this->validate($request, [
-            'document' => 'required|string|max:255',
-            'firstName' => 'required|string|max:255',
-            'lastName' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'celPhone' => 'required|string|max:20',
-        ], [
-            'document.required' => 'El documento es obligatorio.',
-            'firstName.required' => 'El nombre es obligatorio.',
-            'lastName.required' => 'El apellido es obligatorio.',
-            'email.required' => 'El correo electrónico es obligatorio.',
-            'email.email' => 'El correo electrónico debe ser válido.',
-            'celPhone.required' => 'El teléfono celular es obligatorio.',
-        ]);
+        try {
+            $this->validate($request, [
+                'document' => 'required|string|max:255',
+                'firstName' => 'required|string|max:255',
+                'lastName' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'celPhone' => 'required|string|max:20',
+            ], [
+                'document.required' => 'El documento es obligatorio.',
+                'firstName.required' => 'El nombre es obligatorio.',
+                'lastName.required' => 'El apellido es obligatorio.',
+                'email.required' => 'El correo electrónico es obligatorio.',
+                'email.email' => 'El correo electrónico debe ser válido.',
+                'celPhone.required' => 'El teléfono celular es obligatorio.',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['error' => $e->errors()], 422);
+        }
 
         $data = $request->all();
 
@@ -57,13 +61,12 @@ class ClientController extends Controller
                 $data['celPhone']
             ]);
 
+            if ($response['success'] === false) {
 
-
-            if ($request['success'] === false) {
                 return response()->json([
                     'message' => $response['message'] ?? 'Error al registrar el cliente.',
                     'data' => $response['data'] ?? null
-                ], $responses['status'] ?? 500);
+                ], 500);
             }
 
             return response()->json([

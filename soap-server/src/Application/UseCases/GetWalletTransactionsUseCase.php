@@ -47,12 +47,16 @@ class GetWalletTransactionsUseCase
         }
 
         return array_map(function (Transaction $transaction) {
+
+            $is_purchase = (!$transaction->getToken() && $transaction->getSessionId()) ? true : false;
+
             return [
 
                 'amount' => $transaction->getAmount(),
                 'description' => $transaction->getDescription(),
                 'status' => $transaction->getStatus(),
-                'created_at' => $transaction->getCreatedAt()->format('Y-m-d H:i:s'),
+                'created_at' => $transaction->getCreatedAt()->format('d/m/Y H:i:s'),
+                'is_purchase' => $is_purchase,
             ];
         }, $transactions);
     }
