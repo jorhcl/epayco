@@ -22,7 +22,7 @@ class StandardResponse
         ];
     }
 
-    public static function error(string $message, ?int $errorCode = 1000, ?array $data = null, ?int $code = 500): array
+    public static function error(string $message, ?string $errorCode = '', ?array $data = null, ?int $code = 500): array
     {
         return [
             'success' => false,
